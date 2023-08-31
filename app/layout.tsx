@@ -1,6 +1,5 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import Header from "@/components/header";
 
 export const metadata: Metadata = {
   title: "NextJS | Replicate",
@@ -14,10 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="pt-10">
-        <Header />
-        {children}
-      </body>
+      <body className="pt-10">{children}</body>
     </html>
   );
 }

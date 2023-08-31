@@ -1,9 +1,13 @@
 import PromptForm from "@/components/prompt-form";
+import SoundcloudHeader from "@/components/soundcloud-header";
 
 export default function Create() {
   return (
-    <main className="flex min-h-screen flex-col container divide-y">
-      <PromptForm />
-    </main>
+    <>
+      <SoundcloudHeader />
+      <main className="flex min-h-screen flex-col container divide-y">
+        <PromptForm />
+      </main>
+    </>
   );
 }

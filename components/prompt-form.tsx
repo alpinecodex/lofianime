@@ -115,7 +115,7 @@ export default function PromptForm() {
           </form>
         )}
       </Form>
-      {image && <ReplicateImage url={image} />}
+      {image && <ReplicateImage url={image} setImage={setImage} />}
     </>
   );
 }
