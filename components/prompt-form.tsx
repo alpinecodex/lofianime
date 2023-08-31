@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import useSWR from "swr";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -26,6 +27,9 @@ const formSchema = z.object({
 });
 
 export default function PromptForm() {
+  const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  const { data, mutate } = useSWR("/api/remaining", fetcher);
+
   const [loading, setLoading] = useState<boolean>(false);
   const [image, setImage] = useState<string>("");
   const form = useForm<z.infer<typeof formSchema>>({
@@ -42,6 +46,10 @@ export default function PromptForm() {
       body: JSON.stringify(values),
     });
     if (response.status === 200) {
+      const data = await response.json();
+      mutate();
+      setImage(data?.[0]);
+      setLoading(false);
       //   toast({
       //     title: "Successfully Created",
       //     description: "We will send you an email once your report runs!",
@@ -52,13 +60,23 @@ export default function PromptForm() {
       //     description: "Please try again later or reach out to support.",
       //   });
     }
-    const data = await response.json();
-    setImage(data?.[0]);
-    setLoading(false);
   };
 
   return (
     <>
+      {data && (
+        <p className="text-slate-500">
+          You have{" "}
+          <span className="font-semibold">
+            {data.remainingGenerations} generations
+          </span>{" "}
+          left today. Your generation
+          {Number(data.remainingGenerations) > 1 ? "s" : ""} will renew in{" "}
+          <span className="font-semibold">
+            {data.hours} hours and {data.minutes} minutes.
+          </span>
+        </p>
+      )}
       <Form {...form}>
         {!image && (
           <form
