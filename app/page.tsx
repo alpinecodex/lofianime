@@ -62,7 +62,7 @@ export default function Home() {
             <Link href="/create">Try it out</Link>
           </Button>
         </section>
-        <section className="grid grid-cols-2 lg:grid-cols-3 gap-4">
+        <section className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
           {images.map((image, index) => (
             <Image
               key={index}

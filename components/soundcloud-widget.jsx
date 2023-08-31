@@ -46,7 +46,7 @@ export default function SoundcloudWidget() {
           alt="Soundcloud logo"
           height={0}
           width={0}
-          className="h-4 w-4"
+          className="h-6 w-6"
         />
       </button>
       <div>
