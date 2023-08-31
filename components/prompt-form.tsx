@@ -63,55 +63,77 @@ export default function PromptForm() {
         {!image && (
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-8 w-full mt-6"
+            className="space-y-4 w-full mt-6 max-w-[700px]"
           >
-            <FormField
-              control={form.control}
-              name="prompt"
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel className="font-bold">Prompt</FormLabel>
-                  <FormControl>
-                    <Textarea
-                      className="max-w-[600px]"
-                      placeholder="Beachfront property in Okinawa, Japan..."
-                      {...field}
-                    />
-                  </FormControl>
-                  <FormDescription>
-                    Create images with one click.
-                  </FormDescription>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-            {loading ? (
-              <Button disabled={loading}>
-                <svg
-                  className="animate-spin h-5 w-5 mr-3 ..."
-                  viewBox="0 0 24 24"
+            <div className="relative">
+              <FormField
+                control={form.control}
+                name="prompt"
+                render={({ field }) => (
+                  <FormItem className="">
+                    <FormLabel className="sr-only">Prompt</FormLabel>
+                    <FormControl>
+                      <Textarea
+                        className="resize-none"
+                        placeholder="Beachfront property in Okinawa, Japan..."
+                        {...field}
+                      />
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              {loading ? (
+                <Button
+                  disabled={loading}
+                  className="absolute bottom-2 right-2"
                 >
-                  <circle
-                    className="opacity-25"
-                    cx="12"
-                    cy="12"
-                    r="10"
+                  <svg
+                    className="animate-spin h-5 w-5 mr-3 ..."
+                    viewBox="0 0 24 24"
+                  >
+                    <circle
+                      className="opacity-25"
+                      cx="12"
+                      cy="12"
+                      r="10"
+                      stroke="currentColor"
+                      strokeWidth="4"
+                    ></circle>
+                    <path
+                      className="opacity-75"
+                      fill="currentColor"
+                      d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 1.37.259 2.678.719 3.858l1.817-1.1z"
+                    ></path>
+                  </svg>
+                  Processing...
+                </Button>
+              ) : (
+                <Button
+                  type="submit"
+                  disabled={loading}
+                  size="icon"
+                  className="absolute bottom-2 right-2"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="20"
+                    height="20"
+                    viewBox="0 0 24 24"
+                    fill="none"
                     stroke="currentColor"
-                    strokeWidth="4"
-                  ></circle>
-                  <path
-                    className="opacity-75"
-                    fill="currentColor"
-                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 1.37.259 2.678.719 3.858l1.817-1.1z"
-                  ></path>
-                </svg>
-                Processing...
-              </Button>
-            ) : (
-              <Button type="submit" disabled={loading}>
-                Submit
-              </Button>
-            )}
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    className="lucide lucide-send-horizontal h-4 w-4"
+                  >
+                    <path d="m3 3 3 9-3 9 19-9Z" />
+                    <path d="M6 12h16" />
+                  </svg>
+                  <span className="sr-only">Submit</span>
+                </Button>
+              )}
+            </div>
           </form>
         )}
       </Form>

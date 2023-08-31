@@ -5,7 +5,7 @@ export default function Create() {
   return (
     <>
       <SoundcloudHeader />
-      <main className="flex min-h-screen flex-col container divide-y">
+      <main className="flex min-h-screen flex-col container divide-y items-center">
         <PromptForm />
       </main>
     </>

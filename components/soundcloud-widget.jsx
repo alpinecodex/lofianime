@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Image from "next/image";
 
 export default function SoundcloudWidget() {
-  const [hidden, setHidden] = useState(true);
+  const [hidden, setHidden] = useState(false);
 
   useEffect(() => {
     // Dynamically load the SoundCloud API script
@@ -63,9 +63,7 @@ export default function SoundcloudWidget() {
             visibility: hidden ? "hidden" : "visible",
             position: "fixed",
             bottom: "32px",
-            margin: "auto",
-            left: "0",
-            right: "0",
+            right: "32px",
           }}
         ></iframe>
       </div>

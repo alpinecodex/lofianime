@@ -10,7 +10,7 @@ export default function ReplicateImage({
   setImage: React.Dispatch<React.SetStateAction<string>>;
 }) {
   return (
-    <div className="space-y-4 mt-6">
+    <div className="space-y-4 mt-6 flex flex-col items-center">
       <Image
         src={url}
         alt="Generated AI Image"
