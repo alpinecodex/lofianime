@@ -47,16 +47,16 @@ export default function Home() {
     <>
       <Header />
       <main className="flex min-h-screen flex-col container">
-        <section className="mt-6 py-4">
+        <section className="py-8 border-b">
           <div className="space-y-1">
             <h1 className="text-xl font-bold text-center">
               Create Lofi Anime-Inspired Landscapes
             </h1>
           </div>
         </section>
-        <section className="mt-6 py-4 flex flex-col items-center">
+        <section className="py-8 flex flex-col items-center">
           <div className="space-y-1">
-            <h2 className="font-bold text-center">Sign in to start</h2>
+            <h2 className="font-bold text-center">Sign up now, it's free!</h2>
           </div>
           <Button asChild className="mt-6 w-max">
             <Link href="/create">Try it out</Link>

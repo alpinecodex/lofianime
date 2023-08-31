@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import SoundcloudWidget from "./soundcloud-widget";
 
 export default function SoundcloudHeader() {
@@ -6,7 +7,7 @@ export default function SoundcloudHeader() {
     <header className="container">
       <div className="flex items-center justify-between border-b py-4">
         <Link className="flex font-black uppercase" href="/">
-          Alpine Codex
+          <Image alt="default logo" src="logo.svg" width={50} height={50} />
         </Link>
         <div className="flex items-center justify-between gap-4">
           <Link href="https://github.com/9d8dev">
