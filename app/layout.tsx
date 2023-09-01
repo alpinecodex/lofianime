@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import Footer from "@/components/footer";
 
 export const metadata: Metadata = {
-  title: "NextJS | Replicate",
-  description: "Template by Alpine Codex",
+  title: "Lofi Anime",
+  description: "Generate Lofi Anime-inspired Landscapes with AI",
 };
 
 export default function RootLayout({
