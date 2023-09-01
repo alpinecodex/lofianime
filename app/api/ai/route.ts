@@ -28,8 +28,6 @@ export async function POST(request: Request, response: NextResponse) {
   if (ratelimit) {
     const identifier = session.user.email;
     result = await ratelimit.limit(identifier!);
-    // res.setHeader("X-RateLimit-Limit", result.limit);
-    // res.setHeader("X-RateLimit-Remaining", result.remaining);
 
     // Calcualte the remaining time until generations are reset
     const diff = Math.abs(
