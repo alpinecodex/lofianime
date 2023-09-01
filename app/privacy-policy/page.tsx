@@ -106,8 +106,8 @@ export default function PrivacyPolicy() {
           <h3 className="text-3xl font-bold">Updates to this Policy</h3>
           <p>
             Any changes to this Privacy Policy will be communicated to you via
-            email. It's encouraged to periodically review this Privacy Policy
-            for any changes.
+            email. It&apos;s encouraged to periodically review this Privacy
+            Policy for any changes.
           </p>
         </section>
         <section className="space-y-4 py-4">
