@@ -58,12 +58,12 @@ export default function SoundcloudWidget() {
           allow="autoplay"
           style={{
             height: hidden ? "0px" : "166px",
-            width: hidden ? "0px" : "400px",
+            width: hidden ? "0px" : "300px",
             overflow: "hidden",
             visibility: hidden ? "hidden" : "visible",
             position: "fixed",
-            bottom: "32px",
-            right: "32px",
+            bottom: "25px",
+            right: "25px",
           }}
         ></iframe>
       </div>
