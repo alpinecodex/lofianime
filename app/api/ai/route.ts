@@ -1,11 +1,53 @@
 import { NextResponse } from "next/server";
 import Replicate from "replicate";
+import { Ratelimit } from "@upstash/ratelimit";
+import redis from "@/lib/redis";
+import { getServerSession, Session } from "next-auth";
+import { authOptions } from "../auth/[...nextauth]/route";
+
+const ratelimit = redis
+  ? new Ratelimit({
+      redis: redis,
+      limiter: Ratelimit.fixedWindow(5, "1440 m"),
+      analytics: true,
+    })
+  : undefined;
 
 const replicate = new Replicate({
   auth: process.env.REPLICATE_API_TOKEN || "",
 });
 
-export async function POST(request: Request) {
+export async function POST(request: Request, response: NextResponse) {
+  const session = (await getServerSession(authOptions)) as Session;
+  if (!session || !session.user) {
+    return NextResponse.json("Not authenticated", { status: 500 });
+  }
+
+  let result;
+  // Rate Limiting by user email
+  if (ratelimit) {
+    const identifier = session.user.email;
+    result = await ratelimit.limit(identifier!);
+    // res.setHeader("X-RateLimit-Limit", result.limit);
+    // res.setHeader("X-RateLimit-Remaining", result.remaining);
+
+    // Calcualte the remaining time until generations are reset
+    const diff = Math.abs(
+      new Date(result.reset).getTime() - new Date().getTime()
+    );
+    const hours = Math.floor(diff / 1000 / 60 / 60);
+    const minutes = Math.floor(diff / 1000 / 60) - hours * 60;
+
+    if (!result.success) {
+      return NextResponse.json(
+        `Your generations will renew in ${hours} hours and ${minutes} minutes. Email cameron@9d8.dev if you have any questions.`,
+        {
+          status: 429,
+        }
+      );
+    }
+  }
+
   const { prompt } = await request.json();
 
   /* -----------------------------------------------------------------------------
@@ -44,7 +86,13 @@ export async function POST(request: Request) {
       }
     );
 
-    return NextResponse.json(output);
+    return NextResponse.json(output, {
+      // @ts-ignore
+      headers: {
+        "X-RateLimit-Limit": result?.limit,
+        "X-RateLimit-Remaining": result?.remaining,
+      },
+    });
   } catch (error) {
     console.log(error);
     return NextResponse.json(

@@ -25,7 +25,7 @@ export default async function SoundcloudHeader() {
         <Link className="flex font-black uppercase" href="/">
           <Image alt="default logo" src="logo.svg" width={50} height={50} />
         </Link>
-        <div className="inline-flex items-center gap-2">
+        <div className="inline-flex items-center justify-center gap-2">
           {!session ? (
             <div className="flex items-center justify-between gap-2">
               <NavSignIn />
