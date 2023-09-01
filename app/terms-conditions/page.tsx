@@ -15,13 +15,16 @@ export default function TermsConditions() {
         </section>
         <section className="space-y-4 py-4">
           <h3 className="text-3xl font-bold">Agreement to our legal terms</h3>
-          <p>We are Alpine Codex LLC ("Company", "we", "us", "our").</p>
           <p>
-            Welcome to lofianime.com ("App"), provided by Alpine Codex LLC,
-            ("we," "us," "our"). Please read these Terms of Use ("Terms")
-            carefully before using our App. By accessing or using the App, you
-            agree to be bound by these Terms and all applicable laws, rules, and
-            regulations.
+            We are Alpine Codex LLC (&quot;Company&quot;, &quot;we&quot;,
+            &quot;us&quot;, &quot;our&quot;).
+          </p>
+          <p>
+            Welcome to lofianime.com (&quot;App&quot;), provided by Alpine Codex
+            LLC, (&quot;we,&quot; &quot;us,&quot; &quot;our&quot;). Please read
+            these Terms of Use (&quot;Terms&quot;) carefully before using our
+            App. By accessing or using the App, you agree to be bound by these
+            Terms and all applicable laws, rules, and regulations.
           </p>
         </section>
         <section className="space-y-4 py-4">

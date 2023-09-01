@@ -61,7 +61,9 @@ export default async function Home() {
         {!session && (
           <section className="py-8 flex flex-col items-center">
             <div className="space-y-1">
-              <h2 className="font-bold text-center">Sign up now, it's free!</h2>
+              <h2 className="font-bold text-center">
+                Sign up now, it&apos;s free!
+              </h2>
             </div>
             <div className="mt-6">
               <SignIn />
