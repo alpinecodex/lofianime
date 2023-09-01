@@ -65,23 +65,25 @@ export default function PromptForm() {
   return (
     <>
       {data && (
-        <p className="text-slate-500">
-          You have{" "}
-          <span className="font-semibold">
-            {data.remainingGenerations} generations
-          </span>{" "}
-          left today. Your generation
-          {Number(data.remainingGenerations) > 1 ? "s" : ""} will renew in{" "}
-          <span className="font-semibold">
-            {data.hours} hours and {data.minutes} minutes.
-          </span>
-        </p>
+        <div className="mt-4">
+          <p className="text-slate-700 text-sm italic">
+            You have{" "}
+            <span className="font-semibold">
+              {data.remainingGenerations} generations
+            </span>{" "}
+            left today. Your generation
+            {Number(data.remainingGenerations) > 1 ? "s" : ""} will renew in{" "}
+            <span className="font-semibold">
+              {data.hours} hours and {data.minutes} minutes.
+            </span>
+          </p>
+        </div>
       )}
       <Form {...form}>
         {!image && (
           <form
             onSubmit={form.handleSubmit(onSubmit)}
-            className="space-y-4 w-full mt-6 max-w-[700px]"
+            className="w-full mt-3 max-w-[700px]"
           >
             <div className="relative">
               <FormField
@@ -140,9 +142,9 @@ export default function PromptForm() {
                     viewBox="0 0 24 24"
                     fill="none"
                     stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
+                    strokeWidth="2"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
                     className="lucide lucide-send-horizontal h-4 w-4"
                   >
                     <path d="m3 3 3 9-3 9 19-9Z" />

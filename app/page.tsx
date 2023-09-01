@@ -1,7 +1,10 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
+import SignIn from "@/components/sign-in";
 import Header from "@/components/header";
+import { getServerSession, Session } from "next-auth";
+import { authOptions } from "../app/api/auth/[...nextauth]/route";
 
 const images = [
   {
@@ -42,7 +45,8 @@ const images = [
   },
 ];
 
-export default function Home() {
+export default async function Home() {
+  const session = (await getServerSession(authOptions)) as Session;
   return (
     <>
       <Header />
@@ -54,14 +58,16 @@ export default function Home() {
             </h1>
           </div>
         </section>
-        <section className="py-8 flex flex-col items-center">
-          <div className="space-y-1">
-            <h2 className="font-bold text-center">Sign up now, it's free!</h2>
-          </div>
-          <Button asChild className="mt-6 w-max">
-            <Link href="/create">Try it out</Link>
-          </Button>
-        </section>
+        {!session && (
+          <section className="py-8 flex flex-col items-center">
+            <div className="space-y-1">
+              <h2 className="font-bold text-center">Sign up now, it's free!</h2>
+            </div>
+            <div className="mt-6">
+              <SignIn />
+            </div>
+          </section>
+        )}
         <section className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
           {images.map((image, index) => (
             <Image
