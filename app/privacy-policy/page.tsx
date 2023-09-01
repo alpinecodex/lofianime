@@ -10,7 +10,7 @@ export default function PrivacyPolicy() {
             Privacy Policy for lofianime.com
           </h1>
           <h2 className="uppercase font-bold text-center">
-            Last updated: August 31, 2023
+            Last updated: September 1, 2023
           </h2>
         </section>
         <section className="space-y-4 py-4">
@@ -115,7 +115,7 @@ export default function PrivacyPolicy() {
           <p>
             If you have any questions about this Privacy Policy or wish to
             exercise any of your data protection rights, you may contact us at:
-            hello@9d8.dev
+            dev@alpinecodex.com.
           </p>
         </section>
       </main>
