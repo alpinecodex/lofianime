@@ -71,11 +71,7 @@ export default function PromptForm() {
             <span className="font-semibold">
               {data.remainingGenerations} generations
             </span>{" "}
-            left today. Your generation
-            {Number(data.remainingGenerations) > 1 ? "s" : ""} will renew in{" "}
-            <span className="font-semibold">
-              {data.hours} hours and {data.minutes} minutes.
-            </span>
+            left today.
           </p>
         </div>
       )}
