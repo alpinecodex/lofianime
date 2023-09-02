@@ -58,14 +58,22 @@ export default async function Home() {
             </h1>
           </div>
         </section>
-        {!session && (
+        {!session ? (
           <section className="py-8 flex flex-col items-center">
             <div className="space-y-1">
-              <h2 className="font-bold text-center">Sign up now, it's free!</h2>
+              <h2 className="font-bold text-center">
+                Sign up now, it&apos;s free!
+              </h2>
             </div>
             <div className="mt-6">
               <SignIn />
             </div>
+          </section>
+        ) : (
+          <section className="py-8 flex flex-col items-center">
+            <Button asChild>
+              <Link href="/create">Generate</Link>
+            </Button>
           </section>
         )}
         <section className="grid grid-cols-2 lg:grid-cols-3 gap-4 mb-10">
