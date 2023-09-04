@@ -1,6 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import Footer from "@/components/footer";
+import { Toaster } from "@/components/ui/toaster";
 
 export const metadata: Metadata = {
   title: "Lofi Anime",
@@ -17,6 +18,7 @@ export default function RootLayout({
       <body className="pt-10">
         {children}
         <Footer />
+        <Toaster />
       </body>
     </html>
   );

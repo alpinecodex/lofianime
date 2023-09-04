@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/form";
 
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 import ReplicateImage from "./replicate-image";
 
 const formSchema = z.object({
@@ -30,6 +31,7 @@ export default function PromptForm() {
   // using swr to fetch remaining generations and reflect in UI
   const { data, mutate } = useSWR("/api/remaining", fetcher);
 
+  const { toast } = useToast();
   const [loading, setLoading] = useState<boolean>(false);
   const [image, setImage] = useState<string>("");
   const form = useForm<z.infer<typeof formSchema>>({
@@ -51,15 +53,15 @@ export default function PromptForm() {
       mutate();
       setImage(data?.[0]);
       setLoading(false);
-      //   toast({
-      //     title: "Successfully Created",
-      //     description: "We will send you an email once your report runs!",
-      //   });
+      toast({
+        title: "Image successfully generated.",
+        description: "Make sure to download your image!",
+      });
     } else {
-      //   toast({
-      //     title: "An Error Occurred",
-      //     description: "Please try again later or reach out to support.",
-      //   });
+      toast({
+        title: "Something went wrong :(",
+        description: "Please try again later.",
+      });
     }
   };
 
@@ -70,7 +72,7 @@ export default function PromptForm() {
           <p className="text-slate-700 text-sm italic">
             You have{" "}
             <span className="font-semibold">
-              {data.remainingGenerations} generations
+              {data?.remainingGenerations} generations
             </span>{" "}
             left today.
           </p>

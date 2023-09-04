@@ -19,5 +19,5 @@ export async function GET(request: Request) {
 
   const remainingGenerations = 5 - Number(usedGenerations);
 
-  return NextResponse.json(remainingGenerations);
+  return NextResponse.json({ remainingGenerations });
 }
