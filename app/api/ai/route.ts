@@ -5,6 +5,11 @@ import redis from "@/lib/redis";
 import { getServerSession, Session } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 
+type RateLimitHeaders = HeadersInit & {
+  "X-RateLimit-Limit"?: number;
+  "X-RateLimit-Remaining"?: number;
+};
+
 const ratelimit = redis
   ? new Ratelimit({
       redis: redis,
@@ -85,11 +90,10 @@ export async function POST(request: Request, response: NextResponse) {
     );
 
     return NextResponse.json(output, {
-      // @ts-ignore
       headers: {
         "X-RateLimit-Limit": result?.limit,
         "X-RateLimit-Remaining": result?.remaining,
-      },
+      } as RateLimitHeaders,
     });
   } catch (error) {
     console.log(error);
