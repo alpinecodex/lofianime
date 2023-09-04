@@ -5,10 +5,15 @@ import redis from "@/lib/redis";
 import { getServerSession, Session } from "next-auth";
 import { authOptions } from "../auth/[...nextauth]/route";
 
+type RateLimitHeaders = HeadersInit & {
+  "X-RateLimit-Limit"?: number;
+  "X-RateLimit-Remaining"?: number;
+};
+
 const ratelimit = redis
   ? new Ratelimit({
       redis: redis,
-      limiter: Ratelimit.fixedWindow(5, "1440 m"),
+      limiter: Ratelimit.fixedWindow(5, "1440 m"), // 1440 minutes in 24 hours
       analytics: true,
     })
   : undefined;
@@ -36,11 +41,16 @@ export async function POST(request: Request, response: NextResponse) {
     const hours = Math.floor(diff / 1000 / 60 / 60);
     const minutes = Math.floor(diff / 1000 / 60) - hours * 60;
 
+    // return 429 code in response if no generations remain
     if (!result.success) {
       return NextResponse.json(
-        `Your generations will renew in ${hours} hours and ${minutes} minutes. Email cameron@9d8.dev if you have any questions.`,
+        `Generations will renew in ${hours} hours and ${minutes} minutes.`,
         {
           status: 429,
+          headers: {
+            "X-RateLimit-Limit": result?.limit,
+            "X-RateLimit-Remaining": result?.remaining,
+          } as RateLimitHeaders,
         }
       );
     }
@@ -85,17 +95,15 @@ export async function POST(request: Request, response: NextResponse) {
     );
 
     return NextResponse.json(output, {
-      // @ts-ignore
       headers: {
         "X-RateLimit-Limit": result?.limit,
         "X-RateLimit-Remaining": result?.remaining,
-      },
+      } as RateLimitHeaders,
     });
   } catch (error) {
     console.log(error);
-    return NextResponse.json(
-      "An error occurred. Check server logs for more info.",
-      { status: 500 }
-    );
+    return NextResponse.json("An error occurred. Please try again later.", {
+      status: 500,
+    });
   }
 }
