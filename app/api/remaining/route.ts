@@ -16,13 +16,7 @@ export async function GET(request: Request) {
   const usedGenerations =
     (await redis?.get(`@upstash/ratelimit:${identifier!}:${bucket}`)) || 0;
 
-  const resetDate = new Date();
-  resetDate.setHours(19, 0, 0, 0);
-  const diff = Math.abs(resetDate.getTime() - new Date().getTime());
-  const hours = Math.floor(diff / 1000 / 60 / 60);
-  const minutes = Math.floor(diff / 1000 / 60) - hours * 60;
-
   const remainingGenerations = 5 - Number(usedGenerations);
 
-  return NextResponse.json({ remainingGenerations, hours, minutes });
+  return NextResponse.json(remainingGenerations);
 }
