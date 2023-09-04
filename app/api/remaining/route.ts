@@ -9,6 +9,7 @@ export async function GET(request: Request) {
     return NextResponse.json("Not authenticated", { status: 500 });
   }
 
+  // use identifier to get how many generations the user has left for the 24 hour period
   const identifier = session?.user?.email as string | undefined;
   const windowDuration = 24 * 60 * 60 * 1000;
   const bucket = Math.floor(Date.now() / windowDuration);

@@ -27,6 +27,7 @@ const formSchema = z.object({
 
 export default function PromptForm() {
   const fetcher = (url: string) => fetch(url).then((res) => res.json());
+  // using swr to fetch remaining generations and reflect in UI
   const { data, mutate } = useSWR("/api/remaining", fetcher);
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -46,6 +47,7 @@ export default function PromptForm() {
     });
     if (response.status === 200) {
       const data = await response.json();
+      // make call to api route to get remaining generations
       mutate();
       setImage(data?.[0]);
       setLoading(false);
