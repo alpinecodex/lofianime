@@ -37,10 +37,10 @@ Duplicate `.env.example` and create an `.env` file in the root of your directory
 
 ### Using Prisma
 
-Generate Prisma client
+Push schema to the database and generate Prisma client
 
 ```bash
-npx prisma generate
+npx prisma db push
 ```
 
 ### Running the application
